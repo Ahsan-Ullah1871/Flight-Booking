@@ -25,9 +25,17 @@ canceling seats.
 ### Book Seat (`BOOK`)
 
 - Action creator: `book_seat(data)`
-- Payload structure: json { "id": "unique_id", "destination_from": "Source
-  city", "destination_to": "Destination city", "date": "yyyy-mm-dd", "person":
-  "Person's name", "class": "Economy/Business/First" }
+- Payload structure:
+     ```json
+     {
+     	"id": "unique_id",
+     	"destination_from": "Source city",
+     	"destination_to": "Destination city",
+     	"date": "yyyy-mm-dd",
+     	"person": "Person's name",
+     	"class": "Economy/Business/First"
+     }
+     ```
 
 ### Cancel Booking (`CANCEL_BOOK`)
 
@@ -39,19 +47,47 @@ canceling seats.
 The `bookingReducer` manages the `booking_lists` state, which stores information
 about booked seats.
 
-javascript import { BOOK, CANCEL_BOOK } from "./actionTypes";
+```javascript
+import { BOOK, CANCEL_BOOK } from "./actionTypes";
 
-const initial_state = { booking_lists: [], };
+const initial_state = {
+	booking_lists: [],
+};
 
-const bookingReducer = (state = initial_state, action) => { switch (action.type)
-{ case BOOK: return { ...state, booking_lists: [ ...state.booking_lists, { id:
-action.payload.id, destination_from: action.payload.destination_from,
-destination_to: action.payload.destination_to, date: action.payload.date,
-person: action.payload.person, class: action.payload.class, }, ], }; case
-CANCEL_BOOK: return { ...state, booking_lists: state.booking_lists.filter(
-(list) => action.payload.id !== list.id ), }; default: return state; } };
+const bookingReducer = (state = initial_state, action) => {
+	switch (action.type) {
+		case BOOK:
+			return {
+				...state,
+				booking_lists: [
+					...state.booking_lists,
+					{
+						id: action.payload.id,
+						destination_from:
+							action.payload
+								.destination_from,
+						destination_to:
+							action.payload.destination_to,
+						date: action.payload.date,
+						person: action.payload.person,
+						class: action.payload.class,
+					},
+				],
+			};
+		case CANCEL_BOOK:
+			return {
+				...state,
+				booking_lists: state.booking_lists.filter(
+					(list) => action.payload.id !== list.id
+				),
+			};
+		default:
+			return state;
+	}
+};
 
 export default bookingReducer;
+```
 
 ## Getting Started
 
@@ -72,4 +108,3 @@ export default bookingReducer;
 - JavaScript (ES6+)
 
 [Live Demo](https://your-live-demo-url.com)
-
