@@ -37,14 +37,14 @@ const BookingList = () => {
 
 					<tbody
 						class="divide-y divide-gray-300/20"
-						id="lws-previewBooked"
+						id="techlab-previewBooked"
 					>
 						{booking_list.map((list) => {
 							return (
-								<tr class="lws-bookedTable text-black">
+								<tr class="techlab-bookedTable text-black">
 									<td class="px-6 py-4">
 										<div class="flex items-center space-x-3">
-											<p class="lws-bookedFrom">
+											<p class="techlab-bookedFrom">
 												{
 													list.destination_from
 												}
@@ -52,28 +52,28 @@ const BookingList = () => {
 										</div>
 									</td>
 									<td class="px-6 py-4">
-										<p class="lws-bookedTo">
+										<p class="techlab-bookedTo">
 											{
 												list.destination_to
 											}
 										</p>
 									</td>
 									<td class="px-6 py-4 text-center">
-										<p class="lws-bookedDate">
+										<p class="techlab-bookedDate">
 											{
 												list.date
 											}
 										</p>
 									</td>
 									<td class="px-6 py-4 text-center">
-										<p class="lws-bookedGustes">
+										<p class="techlab-bookedGustes">
 											{
 												list.person
 											}
 										</p>
 									</td>
 									<td class="px-6 py-4 text-center">
-										<span class="lws-bookedClass">
+										<span class="techlab-bookedClass">
 											{" "}
 											{
 												list.class
@@ -83,7 +83,7 @@ const BookingList = () => {
 									<td class="px-6 py-4 text-center">
 										<div class="flex justify-center gap-4">
 											<button
-												class="lws-remove"
+												class="techlab-remove"
 												onClick={() =>
 													delete_item(
 														list.id

@@ -22,7 +22,12 @@ const BookingForm = () => {
 		dispatch(
 			book_seat({
 				...booking_state,
-				id: booking_list.length + 1,
+				id:
+					booking_list.length > 0
+						? booking_list[
+								booking_list.length - 1
+						  ].id + 1
+						: 1,
 			})
 		);
 	};
@@ -31,7 +36,7 @@ const BookingForm = () => {
 		<div class="mt-[160px] mx-4 md:mt-[160px] relative">
 			<div class="bg-white rounded-md max-w-6xl w-full mx-auto">
 				<form
-					class="first-hero lws-inputform"
+					class="first-hero techlab-inputform"
 					onSubmit={form_submit}
 				>
 					{/*  From */}
@@ -45,7 +50,7 @@ const BookingForm = () => {
 							<select
 								class="outline-none px-2 py-2 w-full"
 								name="from"
-								id="lws-from"
+								id="techlab-from"
 								required
 								onChange={(e) =>
 									handle_change(
@@ -54,7 +59,10 @@ const BookingForm = () => {
 									)
 								}
 							>
-								<option value="" hidden>
+								<option
+									value=""
+									hidden
+								>
 									Please Select
 								</option>
 								<option value="Dhaka">
@@ -84,7 +92,7 @@ const BookingForm = () => {
 							<select
 								class="outline-none px-2 py-2 w-full"
 								name="to"
-								id="lws-to"
+								id="techlab-to"
 								onChange={(e) =>
 									handle_change(
 										"destination_to",
@@ -93,7 +101,10 @@ const BookingForm = () => {
 								}
 								required
 							>
-								<option value="" hidden>
+								<option
+									value=""
+									hidden
+								>
 									Please Select
 								</option>
 								<option value="Dhaka">
@@ -119,7 +130,7 @@ const BookingForm = () => {
 							type="date"
 							class="outline-none px-2 py-2 w-full date"
 							name="date"
-							id="lws-date"
+							id="techlab-date"
 							onChange={(e) =>
 								handle_change("date", e)
 							}
@@ -138,7 +149,7 @@ const BookingForm = () => {
 							<select
 								class="outline-none px-2 py-2 w-full"
 								name="guests"
-								id="lws-guests"
+								id="techlab-guests"
 								onChange={(e) =>
 									handle_change(
 										"person",
@@ -147,7 +158,10 @@ const BookingForm = () => {
 								}
 								required
 							>
-								<option value="" hidden>
+								<option
+									value=""
+									hidden
+								>
 									Please Select
 								</option>
 								<option value="1">
@@ -177,7 +191,7 @@ const BookingForm = () => {
 							<select
 								class="outline-none px-2 py-2 w-full"
 								name="ticketClass"
-								id="lws-ticketClass"
+								id="techlab-ticketClass"
 								onChange={(e) =>
 									handle_change(
 										"class",
@@ -186,7 +200,10 @@ const BookingForm = () => {
 								}
 								required
 							>
-								<option value="" hidden>
+								<option
+									value=""
+									hidden
+								>
 									Please Select
 								</option>
 								<option value="Business">
@@ -202,7 +219,7 @@ const BookingForm = () => {
 					<button
 						class="addCity"
 						type="submit"
-						id="lws-addCity"
+						id="techlab-addCity"
 						disabled={
 							booking_list?.length == 3
 								? true

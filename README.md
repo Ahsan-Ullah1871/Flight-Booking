@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+![Alt text](image.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TechLab | Flight Booking
 
-## Available Scripts
+This project is a practice application built using React and Redux core
+concepts. It simulates a flight booking system with actions for booking and
+canceling seats.
 
-In the project directory, you can run:
+## Project Structure
 
-### `npm start`
+- `src/`
+     - `actions/`
+          - `actionTypes.js`: Contains action type constants (`BOOK`,
+            `CANCEL_BOOK`).
+          - `bookingActions.js`: Action creators for booking and canceling
+            seats.
+     - `reducers/`
+          - `bookingReducer.js`: Reducer function for managing booking lists.
+     - `components/`: React components for the user interface.
+     - `App.js`: Main component integrating Redux state management.
+     - `index.js`: Entry point of the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Available Actions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Book Seat (`BOOK`)
 
-### `npm test`
+- Action creator: `book_seat(data)`
+- Payload structure:
+     ```json
+     {
+     	"id": "unique_id",
+     	"destination_from": "Source city",
+     	"destination_to": "Destination city",
+     	"date": "yyyy-mm-dd",
+     	"person": "Person's name",
+     	"class": "Economy/Business/First"
+     }
+     ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+````
 
-### `npm run build`
+### Cancel Booking (`CANCEL_BOOK`)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Action creator: `cancel_book(id)`
+- Payload: `id` of the booking to be canceled.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Redux Reducer
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The `bookingReducer` manages the `booking_lists` state, which stores information
+about booked seats.
 
-### `npm run eject`
+```javascript
+import { BOOK, CANCEL_BOOK } from "./actionTypes";
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+const initial_state = {
+	booking_lists: [],
+};
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const bookingReducer = (state = initial_state, action) => {
+	switch (action.type) {
+		case BOOK:
+			return {
+				...state,
+				booking_lists: [
+					...state.booking_lists,
+					{
+						id: action.payload.id,
+						destination_from:
+							action.payload
+								.destination_from,
+						destination_to:
+							action.payload.destination_to,
+						date: action.payload.date,
+						person: action.payload.person,
+						class: action.payload.class,
+					},
+				],
+			};
+		case CANCEL_BOOK:
+			return {
+				...state,
+				booking_lists: state.booking_lists.filter(
+					(list) => action.payload.id !== list.id
+				),
+			};
+		default:
+			return state;
+	}
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+export default bookingReducer;
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Getting Started
 
-## Learn More
+1. Clone the repository:
+   `git clone https://github.com/your-username/techlab-flight-booking.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Use the provided actions to book and cancel seats.
+- View and manage booking lists in the application.
 
-### Code Splitting
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- React
+- Redux (core concepts)
+- JavaScript (ES6+)
 
-### Analyzing the Bundle Size
+````
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

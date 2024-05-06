@@ -5,7 +5,7 @@ const Header = () => {
 		<header id="header">
 			<div class="container">
 				<img
-					src="./img/lws-logo.svg"
+					src="/img/techlab.png"
 					alt="logo"
 					class="logo"
 				/>
